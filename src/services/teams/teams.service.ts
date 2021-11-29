@@ -11,12 +11,12 @@ export class TeamsService {
 
     static teams = [ TeamsService.team1, TeamsService.team2, TeamsService.team3, TeamsService.team4, TeamsService.team5];
 
-    getTeams() {
+    getTeams() : any {
         return TeamsService.teams;
     }
 
     getTeam( id : number ) : any {
-        return TeamsService.teams.forEach( i => i._id = id);
+        return TeamsService.teams.find(i => i._id = id);
     }
 
 }
