@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, HttpCode, ParseIntPipe } from '@nestjs/common';
 import { TeamsService } from 'src/services/teams/teams.service';
 
 
@@ -8,13 +8,13 @@ export class TeamsController {
     constructor(private readonly teamsService: TeamsService){}
 
     @Get('/api/v1/teams')
-    getTeams() : Object {
-        return this.teamsService.getTeams();
+    getTeams() : Array<any> {
+        return this.teamsService.findAll();
     }
 
     @Get('/api/v1/team/:id')
-    getTeam(@Param() params) : Object {
-        return this.teamsService.getTeam(params.id);
+    getTeam( @Param('id',  new ParseIntPipe() ) id : number ) : any {
+        return this.teamsService.findOne(id);
     }
 
 }
