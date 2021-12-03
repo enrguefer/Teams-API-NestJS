@@ -21,4 +21,10 @@ export class TeamsService {
         return TeamsService.teams.find(i => i._id === id);
     }
 
+    createOne( team : any) : any {
+        team._id = utilsService.randomNumberBetween(20000, 99999);
+        TeamsService.teams.push(team);
+        return team;
+    }
+
 }

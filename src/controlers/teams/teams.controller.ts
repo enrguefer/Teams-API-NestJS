@@ -17,4 +17,10 @@ export class TeamsController {
         return this.teamsService.findOne(id);
     }
 
+    @Post('/api/v1/teams')
+    @HttpCode(201)
+    postTeam( @Body() team : any ) : any {
+        return Object;
+    }
+
 }
