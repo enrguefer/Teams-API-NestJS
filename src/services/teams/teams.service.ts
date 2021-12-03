@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { utilsService } from '../utils/utils.service';
 
 @Injectable()
 export class TeamsService {
@@ -11,12 +12,13 @@ export class TeamsService {
 
     static teams = [ TeamsService.team1, TeamsService.team2, TeamsService.team3, TeamsService.team4, TeamsService.team5];
 
-    getTeams() : any {
+
+    findAll() : Array<any> {
         return TeamsService.teams;
     }
 
-    getTeam( id : number ) : any {
-        return TeamsService.teams.find(i => i._id = id);
+    findOne( id : number ) : any {
+        return TeamsService.teams.find(i => i._id === id);
     }
 
 }
