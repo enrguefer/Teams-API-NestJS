@@ -1,0 +1,14 @@
+1. Terminar el CRUD
+2. Tipar la clase Teams
+3. Documentar con swagger
+4. Gestionar errores y excepciones
+5. Utilizar mongoose cómo capa de persistencia, conectarse atlas
+6. Gestionar asincronía
+7. Completar con más apis
+8. Usar herencia para crear un servicio y repositorio base
+9. Integración con APIs externas
+10. Importar colección de postman
+11. Securizar la API REST
+12. Tests unitarios
+13. Integración con herramientas de CI
+14. Despliegue en contenedores docker
