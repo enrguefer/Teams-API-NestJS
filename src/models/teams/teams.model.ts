@@ -1,10 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Base } from "../base/base.model";
 
 @Schema()
-export class Team {
-
-    @Prop()
-    _id : number;
+export class Team extends Base {
 
     @Prop({ required : true})
     name : string;
