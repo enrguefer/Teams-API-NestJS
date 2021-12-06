@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, HttpCode, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, HttpCode, ParseIntPipe, HttpStatus } from '@nestjs/common';
 import { TeamsService } from 'src/services/teams/teams.service';
 
 
@@ -20,7 +20,7 @@ export class TeamsController {
     @Post('/api/v1/teams')
     @HttpCode(201)
     postTeam( @Body() team : any ) : any {
-        return Object;
+        return this.teamsService.createOne(team);
     }
 
 }
