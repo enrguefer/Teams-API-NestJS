@@ -13,7 +13,7 @@ export class TeamsController {
     }
 
     @Get('/api/v1/team/:id')
-    getTeam( @Param('id',  new ParseIntPipe() ) id : number ) : any {
+    getTeam( @Param('id',  new ParseIntPipe({ errorHttpStatusCode : HttpStatus.NOT_ACCEPTABLE}) ) id : number ) : any {
         return this.teamsService.findOne(id);
     }
 
