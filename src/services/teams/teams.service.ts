@@ -27,4 +27,13 @@ export class TeamsService {
         return team;
     }
 
+    updateOne( id: number, updatedTeam: any ) : any {
+
+        updatedTeam._id = id;
+        let index = TeamsService.teams.findIndex( i => i._id = id);
+        
+        TeamsService.teams[index] = updatedTeam;
+        return updatedTeam;
+    }
+
 }
