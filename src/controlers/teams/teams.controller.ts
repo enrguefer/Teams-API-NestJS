@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, HttpCode, ParseIntPipe, HttpStatus, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, HttpCode, ParseIntPipe, HttpStatus, Put, Delete } from '@nestjs/common';
 import { TeamsService } from 'src/services/teams/teams.service';
 
 
@@ -33,6 +33,14 @@ export class TeamsController {
         @Body() team : any 
     ) : any {
         return this.teamsService.updateOne( id, team)
+    }
+
+    @HttpCode(204)
+    @Delete('/api/v1/team/:id')
+    deleteTeam( 
+        @Param ('id', new ParseIntPipe({errorHttpStatusCode : HttpStatus.NOT_ACCEPTABLE}) ) id : number
+    ) : void {
+        this.teamsService.deleteOne(id);
     }
 
 }

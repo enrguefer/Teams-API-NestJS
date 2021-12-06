@@ -36,4 +36,9 @@ export class TeamsService {
         return updatedTeam;
     }
 
+    deleteOne( id : number) : void {
+        let index = TeamsService.teams.findIndex( i => i._id === id);
+        if(index != -1) TeamsService.teams.splice(index, 1);
+    }
+
 }
