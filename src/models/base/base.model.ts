@@ -1,3 +1,4 @@
+import * as mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 /**
@@ -10,8 +11,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Base {
 
-    @Prop()
-    _id : number;
+    @Prop({ type: mongoose.Schema.Types.ObjectId})
+    _id : string;
 
     @Prop()
     createdAt : Date;
