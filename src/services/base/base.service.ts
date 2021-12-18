@@ -10,23 +10,23 @@ import { Base } from "src/models/base/base.model";
 @Injectable()
 export class BaseService <T extends Base> {
 
-    findAll() : Array<T> {
+    async findAll() : Promise<T[]> {
         return null;
     }
 
-    findOne( id : number ) : T {
+    async findOne( id : string ) : Promise<T> {
         return null;
     }
 
-    createOne( T : object ) : T {
+    async createOne( T : object ) : Promise<T> {
         return null;
     }
 
-    updateOne( id : number, T : object ) : T {
+    async updateOne( id : string, T : object ) : Promise<T> {
         return null;
     }
 
-    deleteOne( id : number) : void {
+    async deleteOne( id : string) : Promise<void> {
         return null;
     }
 

@@ -1,5 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Base } from "../base/base.model";
+import { Document } from 'mongoose';
+
+export type TeamDocument = Team & Document;
 
 @Schema()
 export class Team extends Base {
@@ -15,4 +18,4 @@ export class Team extends Base {
 
 }
 
-export const TeamsSchema = SchemaFactory.createForClass(Team);
+export const TeamSchema = SchemaFactory.createForClass(Team);
