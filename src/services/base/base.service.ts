@@ -1,5 +1,6 @@
+import * as mongoose from 'mongoose';
 import { Injectable } from "@nestjs/common";
-import { Base } from "src/models/base/base.model";
+import { Base, BaseDocument } from "src/models/base/base.model";
 
 /**
  * Servicio base de la aplicación que implementa las operaciones CRUD contra BBDD
@@ -8,26 +9,30 @@ import { Base } from "src/models/base/base.model";
  * @version 1
  */
 @Injectable()
-export class BaseService <T extends Base> {
+export class BaseService < EntityDocument extends BaseDocument> {
 
-    async findAll() : Promise<T[]> {
-        return null;
+    constructor ( private baseModel : mongoose.Model<EntityDocument> ){ }
+
+    async findAll() : Promise<EntityDocument[]> {
+        return this.baseModel.find().exec();
     }
 
-    async findOne( id : string ) : Promise<T> {
-        return null;
+    async findOne( id : any ) : Promise<EntityDocument> {
+        return this.baseModel.findById(id).exec();
     }
 
-    async createOne( T : object ) : Promise<T> {
-        return null;
+    async createOne( entityDTO : any ) : Promise<EntityDocument> {
+        const createdEntity = new this.baseModel(entityDTO);
+        return createdEntity.save();
     }
 
-    async updateOne( id : string, T : object ) : Promise<T> {
-        return null;
+    async updateOne( id : any, entityDTO : any ) : Promise<EntityDocument> {
+        this.baseModel.updateOne({_id : id},  entityDTO).exec();
+        return this.findOne(id);
     }
 
-    async deleteOne( id : string) : Promise<void> {
-        return null;
+    async deleteOne( id : any) : Promise<void> {
+        this.baseModel.deleteOne({_id: id}).exec();
     }
 
 }

@@ -8,10 +8,14 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
  * @version 1
  */
 
+ export type BaseDocument = Base & Document;
+
 @Schema()
 export class Base {
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId})
+    @Prop({ 
+        type: mongoose.Schema.Types.ObjectId,
+        auto: true })
     _id : string;
 
     @Prop()

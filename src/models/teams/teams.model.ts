@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Base } from "../base/base.model";
-import { Document } from 'mongoose';
+import { Base, BaseDocument } from "../base/base.model";
 
-export type TeamDocument = Team & Document;
+export type TeamDocument = Team & BaseDocument;
 
 @Schema()
 export class Team extends Base {
