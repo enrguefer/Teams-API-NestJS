@@ -16,7 +16,7 @@ export class TeamsController {
 
     @Get('/api/v1/team/:id')
     getTeam( 
-        @Param('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string 
+        @Param('id', new MongoIdPipe() ) id : string 
     ) : Promise<Team> {
         return this.teamsService.findOne(id);
     }
@@ -31,7 +31,7 @@ export class TeamsController {
 
     @Put('/api/v1/team/:id')
     putTeam( 
-        @Param('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string,
+        @Param('id', new MongoIdPipe() ) id : string,
         @Body() team : Team 
     ) : Promise<Team> {
         return this.teamsService.updateOne( id, team)
@@ -40,7 +40,7 @@ export class TeamsController {
     @HttpCode(204)
     @Delete('/api/v1/team/:id')
     deleteTeam( 
-        @Param ('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string
+        @Param ('id', new MongoIdPipe() ) id : string
     ) : void {
         this.teamsService.deleteOne(id);
     }
