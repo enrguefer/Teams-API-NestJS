@@ -7,7 +7,6 @@ import { BaseService } from '../base/base.service';
 @Injectable()
 export class TeamsService extends BaseService <TeamDocument> {
 
-
     constructor( @InjectModel(Team.name) private teamModel : Model<TeamDocument> ){
         super(teamModel);
     }
