@@ -1,14 +1,17 @@
-1. Búsqueda y paginación de equipos SIGUIENTE
-2. Incluir validadores del modelo de datos en POST y PUT
-3. Documentar con swagger
-4. Gestionar errores y excepciones SIGUIENTE
-5. Implementar middleware para fechas de auditoria SIGUIENTE
-6. Gestionar asincronía
-7. Completar con más apis
+1. Lanzar excepciones en el servicio base cuando no encuentre registros o ocurre una excepción no controlada
+2. Incluir loggers en la aplicación https://tslog.js.org/#/
+3. Incluir transformadores de datos entre entidades de repositorio (auditoria) y DTO (sin auditoria)
+4. Implementar middleware para fechas y usuarios de auditoria SIGUIENTE
+5. Incluir validadores del modelo de datos en POST y PUT
+6. Búsqueda y paginación de equipos SIGUIENTE
+7. Gestionar asincronía
+8. Completar con más apis
 9. Integración con APIs externas
-10. Importar colección de postman
-11. Securizar la API REST
-12. Tests unitarios
-13. Integración con herramientas de CI
-14. Despliegue en contenedores docker
-15. Desplegar la aplicación en heroku
+10 Documentar README.md
+11. Documentar con swagger
+12. Importar colección de postman
+13. Securizar la API REST
+14. Tests unitarios
+15. Integración con herramientas de CI
+16. Despliegue en contenedores docker
+17. Desplegar la aplicación en heroku
