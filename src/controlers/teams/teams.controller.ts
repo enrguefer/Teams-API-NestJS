@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, HttpCode, ParseUUIDPipe, HttpStatus, Put, Delete } from '@nestjs/common';
 import { Team } from 'src/models/teams/teams.model';
+import { MongoIdPipe } from 'src/pipes/mongo.id.pipe';
 import { TeamsService } from 'src/services/teams/teams.service';
 
 
@@ -13,11 +14,9 @@ export class TeamsController {
         return this.teamsService.findAll();
     }
 
-    //new ParseUUIDPipe({version: '4', errorHttpStatusCode : HttpStatus.NOT_ACCEPTABLE})
-
     @Get('/api/v1/team/:id')
     getTeam( 
-        @Param('id') id : string 
+        @Param('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string 
     ) : Promise<Team> {
         return this.teamsService.findOne(id);
     }
@@ -32,7 +31,7 @@ export class TeamsController {
 
     @Put('/api/v1/team/:id')
     putTeam( 
-        @Param('id') id : string,
+        @Param('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string,
         @Body() team : Team 
     ) : Promise<Team> {
         return this.teamsService.updateOne( id, team)
@@ -41,7 +40,7 @@ export class TeamsController {
     @HttpCode(204)
     @Delete('/api/v1/team/:id')
     deleteTeam( 
-        @Param ('id') id : string
+        @Param ('id', new MongoIdPipe( HttpStatus.NOT_ACCEPTABLE )) id : string
     ) : void {
         this.teamsService.deleteOne(id);
     }

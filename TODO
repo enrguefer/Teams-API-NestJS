@@ -1,11 +1,10 @@
-1. Búsqueda y paginación de equipos
-2. Incluir validadores del modelo de datos
+1. Búsqueda y paginación de equipos SIGUIENTE
+2. Incluir validadores del modelo de datos en POST y PUT
 3. Documentar con swagger
-4. Gestionar errores y excepciones
-5. Implementar middleware
+4. Gestionar errores y excepciones SIGUIENTE
+5. Implementar middleware para fechas de auditoria SIGUIENTE
 6. Gestionar asincronía
 7. Completar con más apis
-8. Usar uuid
 9. Integración con APIs externas
 10. Importar colección de postman
 11. Securizar la API REST
