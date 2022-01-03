@@ -1,13 +1,13 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Team, TeamDocument } from 'src/models/teams/teams.model';
 import { BaseService } from '../base/base.service';
+import { TeamEntity, TeamEntityDocument } from 'src/models/teams/entity/teams.entity.model';
 
 @Injectable()
-export class TeamsService extends BaseService <TeamDocument> {
+export class TeamsService extends BaseService <TeamEntityDocument, String> {
 
-    constructor( @InjectModel(Team.name) private teamModel : Model<TeamDocument> ){
+    constructor( @InjectModel(TeamEntity.name) private teamModel : Model<TeamEntityDocument> ){
         super(teamModel);
     }
 
