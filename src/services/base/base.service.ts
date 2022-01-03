@@ -1,18 +1,19 @@
 import * as mongoose from 'mongoose';
 import { UpdateResult, DeleteResult } from 'mongodb'
 import { Injectable } from "@nestjs/common";
-import { BaseDocument } from "src/models/base/base.model";
 import { NotFoundException } from 'src/exceptions/types/not.found.exception';
 import { ServiceUnavailableException } from 'src/exceptions/types/service.unavailable.exception';
+import { BaseEntityDocument } from 'src/models/base/entity/base.entity.model';
 
 /**
  * Servicio base de la aplicación que implementa las operaciones CRUD contra BBDD
  * 
- * @author Enrique Guerrero Fernández
- * @version 1
+ * @param EntityDocument
+ * @param T
  */
+
 @Injectable()
-export class BaseService <EntityDocument extends BaseDocument> {
+export class BaseService <EntityDocument extends BaseEntityDocument<T>, T> {
 
     constructor ( private baseModel : mongoose.Model<EntityDocument> ){ }
 
@@ -28,7 +29,7 @@ export class BaseService <EntityDocument extends BaseDocument> {
     }
 
 
-    async findOne( id : any ) : Promise<EntityDocument> {
+    async findOne( id : T ) : Promise<EntityDocument> {
         
         let res : EntityDocument;
 
@@ -59,7 +60,7 @@ export class BaseService <EntityDocument extends BaseDocument> {
     }
 
 
-    async updateOne( id : any, entityDTO : any ) : Promise<EntityDocument> {
+    async updateOne( id : T, entityDTO : any ) : Promise<EntityDocument> {
 
         let res : UpdateResult;
 
@@ -78,7 +79,7 @@ export class BaseService <EntityDocument extends BaseDocument> {
     }
 
 
-    async deleteOne( id : any ) : Promise<void> {
+    async deleteOne( id : T ) : Promise<void> {
 
         let res : DeleteResult;
 
