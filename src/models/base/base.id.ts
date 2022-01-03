@@ -8,21 +8,12 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
  * @version 1
  */
 
- export type BaseDocument = Base & Document;
+export type BaseIdDocument<T> = BaseId<T> & Document;
 
-@Schema()
-export class Base {
+export class BaseId<T> {
 
     @Prop({ 
         type: mongoose.Schema.Types.ObjectId,
         auto: true })
-    _id : string;
-
-    @Prop()
-    createdAt : Date;
-
-    @Prop()
-    modifiedAt : Date;
+    _id : T;
 }
-
-export const BaseSchema = SchemaFactory.createForClass(Base);
