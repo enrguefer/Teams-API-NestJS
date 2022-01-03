@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, HttpCode, ParseUUIDPipe, HttpStatus, Put, Delete } from '@nestjs/common';
-import { Team } from 'src/models/teams/teams.model';
+import { TeamEntity } from 'src/models/teams/entity/teams.entity.model';
 import { MongoIdPipe } from 'src/pipes/mongo.id.pipe';
 import { TeamsService } from 'src/services/teams/teams.service';
 
@@ -10,30 +10,30 @@ export class TeamsController {
     constructor(private readonly teamsService: TeamsService){}
 
     @Get('/api/v1/teams')
-    getTeams() : Promise<Team[]> {
+    getTeams() : Promise<TeamEntity[]> {
         return this.teamsService.findAll();
     }
 
     @Get('/api/v1/team/:id')
     getTeam( 
         @Param('id', new MongoIdPipe() ) id : string 
-    ) : Promise<Team> {
+    ) : Promise<TeamEntity> {
         return this.teamsService.findOne(id);
     }
 
     @Post('/api/v1/teams')
     @HttpCode(201)
     postTeam( 
-        @Body() team : Team 
-    ) : Promise<Team> {
+        @Body() team : TeamEntity 
+    ) : Promise<TeamEntity> {
         return this.teamsService.createOne(team);
     }
 
     @Put('/api/v1/team/:id')
     putTeam( 
         @Param('id', new MongoIdPipe() ) id : string,
-        @Body() team : Team 
-    ) : Promise<Team> {
+        @Body() team : TeamEntity 
+    ) : Promise<TeamEntity> {
         return this.teamsService.updateOne( id, team)
     }
 
