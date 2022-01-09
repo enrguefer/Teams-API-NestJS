@@ -1,4 +1,5 @@
 import { ArgumentMetadata, Injectable, PipeTransform, HttpStatus, HttpException } from "@nestjs/common";
+import { LOGGER } from "src/app.module";
 import { ConflictException } from "src/exceptions/types/conflict.exception";
 
 /**
@@ -16,12 +17,18 @@ export class MongoIdPipe implements PipeTransform {
 
     async transform(value: any, metadata: ArgumentMetadata) {
 
+        LOGGER.trace("IN: MongoIdPipe::transform: isValidId: ", value);
+
         let res = await MongoIdPipe.mongodb.ObjectID.isValid(value);
         
-        if(!res) 
+        if(!res) {
+            LOGGER.error("ERROR: MongoIdPipe::transform: Invalid mongo _id: ", value);
             throw new ConflictException("Invalid mongo _id: " + value);
-        else    
+            
+        } else {
+            LOGGER.trace("OUT: MongoIdPipe::transform: isValidId: ", value);
             return value;
+        }
     }
 
 }
