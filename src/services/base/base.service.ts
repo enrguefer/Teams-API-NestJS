@@ -1,74 +1,82 @@
-import * as mongoose from 'mongoose';
-import { UpdateResult, DeleteResult } from 'mongodb'
+import {HydratedDocument, Model} from 'mongoose';
+import { UpdateResult, DeleteResult,  } from 'mongodb'
 import { Injectable } from "@nestjs/common";
 import { NotFoundException } from 'src/exceptions/types/not.found.exception';
 import { ServiceUnavailableException } from 'src/exceptions/types/service.unavailable.exception';
-import { BaseEntityDocument } from 'src/models/base/entity/base.entity.model';
+import { BaseEntity } from 'src/models/base/entity/base.entity.model';
 
 /**
  * Servicio base de la aplicación que implementa las operaciones CRUD contra BBDD
  * 
- * @param EntityDocument
+ * @param Entity
  * @param T
  */
-
 @Injectable()
-export class BaseService <EntityDocument extends BaseEntityDocument<T>, T> {
-
-    constructor ( private baseModel : mongoose.Model<EntityDocument> ){ }
+export class BaseService <Entity extends BaseEntity<T>, T> {
 
 
-    async findAll() : Promise<EntityDocument[]> {
+    constructor ( private baseModel : Model<Entity> ){ }
+
+
+    async findAll() : Promise<Entity[]> {
         try {
-
             return await this.baseModel.find().exec();
 
         } catch ( Error ) {
+            console.log(Error)
             throw new ServiceUnavailableException();
         }
     }
 
 
-    async findOne( id : T ) : Promise<EntityDocument> {
+    async findOne( id : T ) : Promise<Entity> {
         
-        let res : EntityDocument;
+        let entity : any;
 
         try {
 
-            res = await this.baseModel.findById(id).exec();
+            entity = await this.baseModel.findById(id).exec();
 
         } catch ( Error ) {
+            console.log(Error)
             throw new ServiceUnavailableException();
         }
 
-        if ( res===null ) 
+        if ( entity===null ) 
             throw new NotFoundException("Not found entity _id: " + id);
 
-        return res;
+        return entity._doc;
     }
 
 
-    async createOne( entityDTO : any ) : Promise<EntityDocument> {
+    async createOne( newEntity : Entity ) : Promise<Entity> {
+
+        let entity : any;
+        
         try {
 
-            let createdEntity = new this.baseModel(entityDTO);
-            return await createdEntity.save();
+            let createdEntity : HydratedDocument<Entity> = new this.baseModel(newEntity);
+            entity = await createdEntity.save();
 
         } catch ( Error ) {
+            console.log(Error)
             throw new ServiceUnavailableException();
         }
+
+        return entity._doc;
     }
 
 
-    async updateOne( id : T, entityDTO : any ) : Promise<EntityDocument> {
+    async updateOne( id : T, entity : Entity ) : Promise<Entity> {
 
         let res : UpdateResult;
 
         try {
 
-            res = await this.baseModel.updateOne({_id : id},  entityDTO).exec();
+            res = await this.baseModel.updateOne({_id : id},  entity).exec();
 
         } catch ( Error ) {
+            console.log(Error)
             throw new ServiceUnavailableException();
         }
 
@@ -88,6 +96,7 @@ export class BaseService <EntityDocument extends BaseEntityDocument<T>, T> {
             res = await this.baseModel.deleteOne({_id: id}).exec();
 
         } catch ( Error ) {
+            console.log(Error)
             throw new ServiceUnavailableException();
         }
 
