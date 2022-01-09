@@ -1,5 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from "@nestjs/common";
 import { HttpAdapterHost } from '@nestjs/core';
+import { LOGGER } from "src/app.module";
 
 import { ApiException } from "./types/api.exception";
 
@@ -9,6 +10,8 @@ export class ApiExceptionHandler implements ExceptionFilter {
     constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
     catch( exception : unknown, host: ArgumentsHost ) : void {
+
+        LOGGER.error("IN: ApiExceptionHandler::catch: exception: ", exception);
 
         const { httpAdapter } = this.httpAdapterHost;
         const ctx = host.switchToHttp();
@@ -21,7 +24,6 @@ export class ApiExceptionHandler implements ExceptionFilter {
             ? (exception as ApiException).message
             : "Internal Server Error";
 
-        //TODO: Sacar por consola las excepciones
 
         const responseBody = {
             statusCode: httpStatusCode,
@@ -30,6 +32,7 @@ export class ApiExceptionHandler implements ExceptionFilter {
             path: httpAdapter.getRequestUrl(ctx.getRequest()),
         };
 
+        LOGGER.error("OUT: ApiExceptionHandler::catch: response: ", responseBody);
         httpAdapter.reply(ctx.getResponse(), responseBody, httpStatusCode);
     }
 }
