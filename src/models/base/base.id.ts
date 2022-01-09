@@ -1,15 +1,13 @@
 import * as mongoose from 'mongoose';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop } from '@nestjs/mongoose';
 
 /**
- * Modelo de datos base con auditoría para los modelos de datos de la aplicación
+ * Modelo de datos base con _id para los objetos persitentes en BBDD
  * 
+ * @param T
  * @author Enrique Guerrero Fernández
  * @version 1
  */
-
-export type BaseIdDocument<T> = BaseId<T> & Document;
-
 export class BaseId<T> {
 
     @Prop({ 
@@ -17,3 +15,5 @@ export class BaseId<T> {
         auto: true })
     _id : T;
 }
+
+export type BaseIdDocument<T> = BaseId<T> & Document;
