@@ -5,12 +5,14 @@ import { ApiExceptionHandler } from './exceptions/api.exception.handler';
 import { TeamsModule } from './modules/teams/teams.module';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
+import { CamelCaseNamingConvention } from '@automapper/core';
 
 @Module({
   imports: [
     TeamsModule,
     MongooseModule.forRoot('mongodb+srv://<USER>:<PASSWORD>@cluster0.97vvi.mongodb.net/teams-api-nestjs?retryWrites=true&w=majority'),
-    AutomapperModule.forRoot( { options: [{ name: 'Mapper', pluginInitializer: classes }], singular: true }),
+    AutomapperModule.forRoot( { options: [{ name: 'classes', pluginInitializer: classes, namingConventions: new CamelCaseNamingConvention()
+  }], singular: true }),
   ],
   controllers: [],
   providers: [
