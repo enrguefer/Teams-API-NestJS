@@ -6,6 +6,10 @@ import { TeamsModule } from './modules/teams/teams.module';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { CamelCaseNamingConvention } from '@automapper/core';
+import { Logger } from 'tslog';
+
+
+export const LOGGER: Logger = new Logger();
 
 @Module({
   imports: [
