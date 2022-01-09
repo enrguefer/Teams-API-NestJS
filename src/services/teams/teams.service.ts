@@ -4,8 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { BaseService } from '../base/base.service';
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
-import { TeamEntity, TeamEntityDocument } from 'src/models/teams/entity/teams.entity.model';
-import { TeamDTO } from 'src/models/teams/dto/teams.dto.model';
+import { TeamEntity } from 'src/models/teams/entity/teams.entity.model';
 
 @Injectable()
 export class TeamsService extends BaseService <TeamEntity, String> {
