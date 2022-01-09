@@ -1,7 +1,7 @@
-1. Incluir loggers en la aplicación https://tslog.js.org/#/ SIGUIENTE
 2. Implementar middleware para fechas y usuarios de auditoria SIGUIENTE
-3. Incluir validadores del modelo de datos en POST y PUT
+3. Incluir validadores del modelo de datos en POST y PUT SIGUIENTE
 4. Búsqueda y paginación de equipos SIGUIENTE
+5. Crear anotación propia para los loggers
 5. Gestionar asincronía
 6. Completar con más apis
 7. Integración con APIs externas
